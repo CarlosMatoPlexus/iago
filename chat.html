@@ -1,106 +1,336 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Salesforce Chatbot</title>
-<style>
-       /* Botón flotante circular */
-       #chat-button {
-           position: fixed;
-           bottom: 20px;
-           right: 20px;
-           width: 60px;
-           height: 60px;
-           background-color: #0070d2;
-           color: white;
-           border-radius: 50%;
-           display: flex;
-           align-items: center;
-           justify-content: center;
-           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-           cursor: pointer;
-           z-index: 1000;
-       }
-       #chat-button:hover {
-           background-color: #005bb5;
-       }
-       /* Ventana del chatbot */
-       #chat-container {
-           position: fixed;
-           bottom: 90px;
-           right: 20px;
-           width: 300px;
-           height: 400px;
-           background-color: white;
-           border: 1px solid #ccc;
-           border-radius: 10px;
-           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-           display: none;
-           z-index: 1000;
-       }
-</style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Salesforce Chatbot</title>
+	<style>
+		/* Botón flotante circular */
+
+		#chat-button {
+
+			position: fixed;
+
+			bottom: 20px;
+
+			right: 20px;
+
+			width: 60px;
+
+			height: 60px;
+
+			background-color: #0070d2;
+
+			color: white;
+
+			border-radius: 50%;
+
+			display: flex;
+
+			align-items: center;
+
+			justify-content: center;
+
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+			cursor: pointer;
+
+			z-index: 1000;
+
+		}
+
+		#chat-button:hover {
+
+			background-color: #005bb5;
+
+		}
+
+		/* Ventana del chatbot */
+
+		#chat-container {
+
+			position: fixed;
+
+			bottom: 90px;
+
+			right: 20px;
+
+			width: 300px;
+
+			height: 400px;
+
+			background-color: white;
+
+			border: 1px solid #ccc;
+
+			border-radius: 10px;
+
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+			display: none;
+
+			z-index: 1000;
+
+		}
+	</style>
 </head>
+
 <body>
-<!-- Botón para abrir el chatbot -->
-<div id="chat-button" onclick="toggleChat()">💬</div>
-<!-- Contenedor para el chatbot -->
-<div id="chat-container"></div>
-<script type="text/javascript">
-       let isChatInitialized = false; // Variable para evitar inicializaciones múltiples
-       function loadScript(url, callback) {
-           const script = document.createElement('script');
-           script.type = 'text/javascript';
-           script.src = url;
-           script.onload = callback;
-           script.onerror = function () {
-               console.error('Error al cargar el script:', url);
-           };
-           document.head.appendChild(script);
-       }
-       function initEmbeddedMessaging() {
-           if (typeof embeddedservice_bootstrap === 'undefined') {
-               console.error('embeddedservice_bootstrap no está definido.');
-               return;
-           }
-           if (isChatInitialized) {
-               console.warn('El chatbot ya está inicializado.');
-               return;
-           }
-           try {
-               console.log('Inicializando embeddedservice_bootstrap...');
-               embeddedservice_bootstrap.settings.language = 'es_MX';
-               embeddedservice_bootstrap.init(
-                   '00D7Z000000AGdW',
-                   'Iago',
-                   'https://ouvacdepourense--ouvacqa.sandbox.my.site.com/ESWIago1727356051668',
-                   {
-                       scrt2URL: 'https://ouvacdepourense--ouvacqa.sandbox.my.salesforce-scrt.com'
-                   }
-               );
-               isChatInitialized = true; // Marcar como inicializado
-           } catch (err) {
-               console.error('Error al inicializar el chatbot:', err);
-           }
-       }
-       function toggleChat() {
-           const chatContainer = document.getElementById('chat-container');
-           if (chatContainer.style.display === 'none' || chatContainer.style.display === '') {
-               chatContainer.style.display = 'block';
-               if (!isChatInitialized) {
-                   initEmbeddedMessaging();
-               }
-           } else {
-               chatContainer.style.display = 'none';
-           }
-       }
-       // Carga el script y lo inicializa una sola vez
-       loadScript(
-           'https://ouvacdepourense--ouvacqa.sandbox.my.site.com/ESWIago1727356051668/assets/js/bootstrap.min.js',
-           function () {
-               console.log('Script de bootstrap cargado.');
-           }
-       );
-</script>
+	<!-- Botón para abrir el chatbot -->
+	<div id="chat-button" onclick="toggleChat()">💬</div>
+	<!-- Contenedor para el chatbot -->
+	<div id="chat-container"></div>
+	<script type="text/javascript">
+
+		let isChatInitialized = false; // Variable para evitar inicializaciones múltiples
+
+		function loadScript(url, callback) {
+
+			const script = document.createElement('script');
+
+			script.type = 'text/javascript';
+
+			script.src = url;
+
+			script.onload = callback;
+
+			script.onerror = function () {
+
+				console.error('Error al cargar el script:', url);
+
+			};
+
+			document.head.appendChild(script);
+
+		}
+
+		function initEmbeddedMessaging() {
+
+			if (typeof embeddedservice_bootstrap === 'undefined') {
+
+				console.error('embeddedservice_bootstrap no está definido.');
+
+				return;
+
+			}
+
+			if (isChatInitialized) {
+
+				console.warn('El chatbot ya está inicializado.');
+
+				return;
+
+			}
+
+			try {
+
+				console.log('Inicializando embeddedservice_bootstrap...');
+
+				embeddedservice_bootstrap.settings.language = 'es_MX';
+
+				embeddedservice_bootstrap.init(
+
+					'00D7Z000000AGdW',
+
+					'Iago',
+
+					'https://ouvacdepourense--ouvacqa.sandbox.my.site.com/ESWIago1727356051668',
+
+					{
+
+						scrt2URL: 'https://ouvacdepourense--ouvacqa.sandbox.my.salesforce-scrt.com'
+
+					}
+
+				);
+
+				isChatInitialized = true; // Marcar como inicializado
+
+			} catch (err) {
+
+				console.error('Error al inicializar el chatbot:', err);
+
+			}
+
+		}
+
+		function toggleChat() {
+
+			const chatContainer = document.getElementById('chat-container');
+
+			if (chatContainer.style.display === 'none' || chatContainer.style.display === '') {
+
+				chatContainer.style.display = 'block';
+
+				if (!isChatInitialized) {
+
+					initEmbeddedMessaging();
+
+				}
+
+			} else {
+
+				chatContainer.style.display = 'none';
+
+			}
+
+		}
+
+		// Carga el script y lo inicializa una sola vez
+
+		loadScript(
+
+			'https://ouvacdepourense--ouvacqa.sandbox.my.site.com/ESWIago1727356051668/assets/js/bootstrap.min.js',
+
+			function () {
+
+				console.log('Script de bootstrap cargado.');
+
+			}
+
+		);
+	</script>
 </body>
+
+</html>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Salesforce Chatbot</title>
+	<style>
+		/* Botón flotante circular */
+
+		#chat-button {
+
+			position: fixed;
+
+			bottom: 20px;
+
+			right: 20px;
+
+			width: 60px;
+
+			height: 60px;
+
+			background-color: #0070d2;
+
+			color: white;
+
+			border-radius: 50%;
+
+			display: flex;
+
+			align-items: center;
+
+			justify-content: center;
+
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+			cursor: pointer;
+
+			z-index: 1000;
+
+		}
+
+		#chat-button:hover {
+
+			background-color: #005bb5;
+
+		}
+	</style>
+</head>
+
+<body>
+	<!-- Botón para abrir el chatbot -->
+	<div id="chat-button" onclick="initEmbeddedMessaging()">💬</div>
+	<script type="text/javascript">
+
+		let isChatInitialized = false; // Variable para evitar inicializaciones múltiples
+
+		// Función para cargar el script de Salesforce
+
+		function loadScript(url, callback) {
+
+			const script = document.createElement('script');
+
+			script.type = 'text/javascript';
+
+			script.src = url;
+
+			script.onload = callback;
+
+			script.onerror = function () {
+
+				console.error('Error al cargar el script:', url);
+
+			};
+
+			document.head.appendChild(script);
+
+		}
+
+		// Inicializar Embedded Messaging
+
+		function initEmbeddedMessaging() {
+
+			if (isChatInitialized) {
+
+				console.warn('El chatbot ya está inicializado.');
+
+				return;
+
+			}
+
+			try {
+
+				console.log('Inicializando embeddedservice_bootstrap...');
+
+				embeddedservice_bootstrap.settings.language = 'es_MX';
+
+				embeddedservice_bootstrap.init(
+
+					'00D7Z000000AGdW',
+
+					'Iago',
+
+					'https://ouvacdepourense--ouvacqa.sandbox.my.site.com/ESWIago1727356051668',
+
+					{
+
+						scrt2URL: 'https://ouvacdepourense--ouvacqa.sandbox.my.salesforce-scrt.com'
+
+					}
+
+				);
+
+				isChatInitialized = true; // Marcar como inicializado
+
+			} catch (err) {
+
+				console.error('Error al inicializar el chatbot:', err);
+
+			}
+
+		}
+
+		// Cargar el script de Salesforce
+
+		loadScript(
+
+			'https://ouvacdepourense--ouvacqa.sandbox.my.site.com/ESWIago1727356051668/assets/js/bootstrap.min.js',
+
+			function () {
+
+				console.log('Script de Salesforce cargado.');
+
+			}
+
+		);
+	</script>
+</body>
+
 </html>
