@@ -1,62 +1,103 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chatbot Salesforce</title>
-<style>
-       /* Estilo para el botón circular */
-       #chatButton {
-           position: fixed;
-           bottom: 20px;
-           right: 20px;
-           width: 60px;
-           height: 60px;
-           background-color: #0070d2;
-           border-radius: 50%;
-           border: none;
-           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-           color: white;
-           font-size: 24px;
-           text-align: center;
-           line-height: 60px;
-           cursor: pointer;
-           z-index: 1000;
-       }
-       /* Ocultar inicialmente el contenedor del chatbot */
-       #chatContainer {
-           display: none;
-       }
-</style>
-<script type="text/javascript">
-       function toggleChat() {
-           const chatContainer = document.getElementById('chatContainer');
-           chatContainer.style.display = chatContainer.style.display === 'none' ? 'block' : 'none';
-       }
-       function initEmbeddedMessaging() {
-           try {
-                  alert('hola');
-               embeddedservice_bootstrap.settings.language = 'es_MX';
-               embeddedservice_bootstrap.init(
-                   '00D7Z000000AGdW',
-                   'Iago',
-                   'https://ouvacdepourense--ouvacqa.sandbox.my.site.com/ESWIago1727356051668',
-                   {
-                       scrt2URL: 'https://ouvacdepourense--ouvacqa.sandbox.my.salesforce-scrt.com'
-                   }
-               );
-           } catch (err) {
-               console.error('Error loading Embedded Messaging:', err);
-           }
-       }
-</script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Salesforce Chatbot</title>
+	<style>
+		/* Botón flotante circular */
+		#chat-button {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			width: 60px;
+			height: 60px;
+			background-color: #0070d2;
+			color: white;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			cursor: pointer;
+			z-index: 1000;
+		}
+
+		#chat-button:hover {
+			background-color: #005bb5;
+		}
+
+		/* Ventana del chatbot */
+		#chat-container {
+			position: fixed;
+			bottom: 90px;
+			right: 20px;
+			width: 300px;
+			height: 400px;
+			background-color: white;
+			border: 1px solid #ccc;
+			border-radius: 10px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			display: none;
+			z-index: 1000;
+		}
+	</style>
 </head>
+
 <body>
-<!-- Botón circular -->
-<button id="chatButton" onclick="toggleChat()">💬</button>
-<!-- Contenedor del chatbot -->
-<div id="chatContainer">
-<script type='text/javascript' src='https://ouvacdepourense--ouvacqa.sandbox.my.site.com/ESWIago1727356051668/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
-</div>
+	<!-- Botón para abrir el chatbot -->
+	<div id="chat-button" onclick="toggleChat()">💬</div>
+	<!-- Contenedor para el chatbot -->
+	<div id="chat-container"></div>
+	<script type="text/javascript">
+		// Función para cargar scripts dinámicamente
+		function loadScript(url, callback) {
+			var script = document.createElement('script');
+			script.type = 'text/javascript';
+			script.src = url;
+			script.onload = callback;
+			script.onerror = function () {
+				console.error('Error al cargar el script:', url);
+			};
+			document.head.appendChild(script);
+		}
+		// Función para inicializar el chatbot
+		function initEmbeddedMessaging() {
+			if (typeof embeddedservice_bootstrap === 'undefined') {
+				console.error('embeddedservice_bootstrap no está definido.');
+				return;
+			}
+			try {
+				console.log('Inicializando embeddedservice_bootstrap...');
+				embeddedservice_bootstrap.settings.language = 'es_MX';
+				embeddedservice_bootstrap.init(
+					'00D7Z000000AGdW',
+					'Iago',
+					'https://ouvacdepourense--ouvacqa.sandbox.my.site.com/ESWIago1727356051668',
+					{
+						scrt2URL: 'https://ouvacdepourense--ouvacqa.sandbox.my.salesforce-scrt.com'
+					}
+				);
+			} catch (err) {
+				console.error('Error loading Embedded Messaging:', err);
+			}
+		}
+		// Función para mostrar u ocultar el chatbot
+		function toggleChat() {
+			var chatContainer = document.getElementById('chat-container');
+			if (chatContainer.style.display === 'none' || chatContainer.style.display === '') {
+				chatContainer.style.display = 'block';
+			} else {
+				chatContainer.style.display = 'none';
+			}
+		}
+		// Carga el script de Salesforce y luego inicializa el chatbot
+		loadScript(
+			'https://ouvacdepourense--ouvacqa.sandbox.my.site.com/ESWIago1727356051668/assets/js/bootstrap.min.js',
+			initEmbeddedMessaging
+		);
+	</script>
 </body>
+
 </html>
