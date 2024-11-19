@@ -1,25 +1,61 @@
-<html>
-	<div background-color: #0061a7;>
-		<script type='text/javascript' src='https://ouvacdepourense--ouvacqa.sandbox.my.site.com/ESWIago1727356051668/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
-  <script type='text/javascript'>
-	function initEmbeddedMessaging() {
-		try {
-			embeddedservice_bootstrap.settings.language = 'es_MX'; // For example, enter 'en' or 'en-US'
-
-			embeddedservice_bootstrap.init(
-				'00D7Z000000AGdW',
-				'Iago',
-				'https://ouvacdepourense--ouvacqa.sandbox.my.site.com/ESWIago1727356051668',
-				{
-					scrt2URL: 'https://ouvacdepourense--ouvacqa.sandbox.my.salesforce-scrt.com'
-				}
-			);
-		} catch (err) {
-			console.error('Error loading Embedded Messaging: ', err);
-		}
-	};
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chatbot Salesforce</title>
+<style>
+       /* Estilo para el botón circular */
+       #chatButton {
+           position: fixed;
+           bottom: 20px;
+           right: 20px;
+           width: 60px;
+           height: 60px;
+           background-color: #0070d2;
+           border-radius: 50%;
+           border: none;
+           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+           color: white;
+           font-size: 24px;
+           text-align: center;
+           line-height: 60px;
+           cursor: pointer;
+           z-index: 1000;
+       }
+       /* Ocultar inicialmente el contenedor del chatbot */
+       #chatContainer {
+           display: none;
+       }
+</style>
+<script type="text/javascript">
+       function toggleChat() {
+           const chatContainer = document.getElementById('chatContainer');
+           chatContainer.style.display = chatContainer.style.display === 'none' ? 'block' : 'none';
+       }
+       function initEmbeddedMessaging() {
+           try {
+               embeddedservice_bootstrap.settings.language = 'es_MX';
+               embeddedservice_bootstrap.init(
+                   '00D7Z000000AGdW',
+                   'Iago',
+                   'https://ouvacdepourense--ouvacqa.sandbox.my.site.com/ESWIago1727356051668',
+                   {
+                       scrt2URL: 'https://ouvacdepourense--ouvacqa.sandbox.my.salesforce-scrt.com'
+                   }
+               );
+           } catch (err) {
+               console.error('Error loading Embedded Messaging:', err);
+           }
+       }
 </script>
-		</div>
-
-
+</head>
+<body>
+<!-- Botón circular -->
+<button id="chatButton" onclick="toggleChat()">💬</button>
+<!-- Contenedor del chatbot -->
+<div id="chatContainer">
+<script type='text/javascript' src='https://ouvacdepourense--ouvacqa.sandbox.my.site.com/ESWIago1727356051668/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+</div>
+</body>
 </html>
