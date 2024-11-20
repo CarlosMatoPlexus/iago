@@ -1,336 +1,60 @@
-<!DOCTYPE html>
-<html lang="es">
-
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Salesforce Chatbot</title>
-	<style>
-		/* Botón flotante circular */
-
-		#chat-button {
-
-			position: fixed;
-
-			bottom: 20px;
-
-			right: 20px;
-
-			width: 60px;
-
-			height: 60px;
-
-			background-color: #0070d2;
-
-			color: white;
-
-			border-radius: 50%;
-
-			display: flex;
-
-			align-items: center;
-
-			justify-content: center;
-
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-
-			cursor: pointer;
-
-			z-index: 1000;
-
-		}
-
-		#chat-button:hover {
-
-			background-color: #005bb5;
-
-		}
-
-		/* Ventana del chatbot */
-
-		#chat-container {
-
-			position: fixed;
-
-			bottom: 90px;
-
-			right: 20px;
-
-			width: 300px;
-
-			height: 400px;
-
-			background-color: white;
-
-			border: 1px solid #ccc;
-
-			border-radius: 10px;
-
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-
-			display: none;
-
-			z-index: 1000;
-
-		}
-	</style>
+<script src="/static/111213/js/perf/stub.js" type="text/javascript"></script>
+<script src="/jslibrary/1721157841252/sfdc/main.js" type="text/javascript"></script>
+<script src="/jslibrary/jslabels/1731980015000/en_US.js" type="text/javascript"></script>
+<link class="user" href="/slds/css/RbVQYHiCq6KaMucSIFvBqg/min/lightningstylesheets/one:oneNamespace,force:sldsTokens,force:base,force:oneSalesforceSkin,force:levelOneDensity,force:themeTokens,force:formFactorLarge/slds.css" rel="stylesheet" type="text/css">
+<link class="user" href="/slds/css/rBGdGoVAuS_gTNuda-y6tQ/min/scoped/one:oneNamespace,force:sldsTokens,force:base,force:oneSalesforceSkin,force:levelOneDensity,force:themeTokens,force:formFactorLarge/slds.css" rel="stylesheet" type="text/css">
+<script src="/jslibrary/1698336665252/sfdc/NetworkTracking.js" type="text/javascript"></script>
+<script>
+       try {
+           NetworkTracking.init('/_ui/networks/tracking/NetworkTrackingServlet', 'network', '066UD0000003A4T');
+       } catch (x) {}
+</script>
+<script>
+       (function(UITheme) {
+           UITheme.getUITheme = function() {
+               return UserContext.uiTheme;
+           };
+       }(window.UITheme = window.UITheme || {}));
+</script>
+<meta http-equiv="PRAGMA" content="NO-CACHE">
+<meta http-equiv="Expires" content="Mon, 01 Jan 1990 12:00:00 GMT">
+<title>Test Messaging | Salesforce</title>
+<style type="text/css">
+       /* Aquí están todos los estilos */
+</style>
+<script async="true" src="https://play.vidyard.com/embed/v4.js" type="text/javascript"></script>
+<link id="embeddedMessagingBootstrapStyles" href="https://ouvacdepourense--ouvacqa.sandbox.my.site.com/ESWIago1727356051668/assets/styles/bootstrap.min.css" type="text/css" rel="stylesheet">
 </head>
-
 <body>
-	<!-- Botón para abrir el chatbot -->
-	<div id="chat-button" onclick="toggleChat()">💬</div>
-	<!-- Contenedor para el chatbot -->
-	<div id="chat-container"></div>
-	<script type="text/javascript">
-
-		let isChatInitialized = false; // Variable para evitar inicializaciones múltiples
-
-		function loadScript(url, callback) {
-
-			const script = document.createElement('script');
-
-			script.type = 'text/javascript';
-
-			script.src = url;
-
-			script.onload = callback;
-
-			script.onerror = function () {
-
-				console.error('Error al cargar el script:', url);
-
-			};
-
-			document.head.appendChild(script);
-
-		}
-
-		function initEmbeddedMessaging() {
-
-			if (typeof embeddedservice_bootstrap === 'undefined') {
-
-				console.error('embeddedservice_bootstrap no está definido.');
-
-				return;
-
-			}
-
-			if (isChatInitialized) {
-
-				console.warn('El chatbot ya está inicializado.');
-
-				return;
-
-			}
-
-			try {
-
-				console.log('Inicializando embeddedservice_bootstrap...');
-
-				embeddedservice_bootstrap.settings.language = 'es';
-
-				embeddedservice_bootstrap.init(
-
-					'00D7Z000000AGdW',
-
-					'Iago',
-
-					'https://ouvacdepourense--ouvacqa.sandbox.my.site.com/ESWIago1727356051668',
-
-					{
-
-						scrt2URL: 'https://ouvacdepourense--ouvacqa.sandbox.my.salesforce-scrt.com'
-
-					}
-
-				);
-
-				isChatInitialized = true; // Marcar como inicializado
-
-			} catch (err) {
-
-				console.error('Error al inicializar el chatbot:', err);
-
-			}
-
-		}
-
-		function toggleChat() {
-
-			const chatContainer = document.getElementById('chat-container');
-
-			if (chatContainer.style.display === 'none' || chatContainer.style.display === '') {
-
-				chatContainer.style.display = 'block';
-
-				if (!isChatInitialized) {
-
-					initEmbeddedMessaging();
-
-				}
-
-			} else {
-
-				chatContainer.style.display = 'none';
-
-			}
-
-		}
-
-		// Carga el script y lo inicializa una sola vez
-
-		loadScript(
-
-			'https://ouvacdepourense--ouvacqa.sandbox.my.site.com/ESWIago1727356051668/assets/js/bootstrap.min.js',
-
-			function () {
-
-				console.log('Script de bootstrap cargado.');
-
-			}
-
-		);
-	</script>
+<div id="bgImage"></div>
+<div id="mainContainer">
+<div id="logoContainer">
+<img alt="Salesforce logo" id="logo" src="https://c1.sfdcstatic.com/content/dam/sfdc-docs/www/logos/logo-salesforce.svg" width="65px">
+</div>
+<div id="bodyContainer">
+<h1>Test Your Messaging Deployment</h1>
+<ol>
+<li>In the previous browser tab where you’re signed into Salesforce, open the agent console.</li>
+<li>In the Omni-Channel utility or sidebar, make yourself available to accept incoming messaging sessions.<br>
+<button id="accordion" class="">
+<img class="chevronright" src="/apexpages/slds/latest/assets/icons/utility/chevronright_60.png">
+<img class="chevrondown" src="/apexpages/slds/latest/assets/icons/utility/chevrondown_60.png" style="display: none;">
+</button>
+</li>
+</ol>
+</div>
+</div>
+<script>
+       // Aquí es donde se mantiene la lógica de initEmbeddedMessaging
+       function initEmbeddedMessaging() {
+           console.log("Initializing Embedded Messaging...");
+           // Inserta tu lógica para configurar la mensajería embebida aquí
+       }
+       document.addEventListener("DOMContentLoaded", function() {
+           initEmbeddedMessaging();
+       });
+</script>
 </body>
-
-</html>
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Salesforce Chatbot</title>
-	<style>
-		/* Botón flotante circular */
-
-		#chat-button {
-
-			position: fixed;
-
-			bottom: 20px;
-
-			right: 20px;
-
-			width: 60px;
-
-			height: 60px;
-
-			background-color: #0070d2;
-
-			color: white;
-
-			border-radius: 50%;
-
-			display: flex;
-
-			align-items: center;
-
-			justify-content: center;
-
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-
-			cursor: pointer;
-
-			z-index: 1000;
-
-		}
-
-		#chat-button:hover {
-
-			background-color: #005bb5;
-
-		}
-	</style>
-</head>
-
-<body>
-	<!-- Botón para abrir el chatbot -->
-	<div id="chat-button" onclick="initEmbeddedMessaging()">💬</div>
-	<script type="text/javascript">
-
-		let isChatInitialized = false; // Variable para evitar inicializaciones múltiples
-
-		// Función para cargar el script de Salesforce
-
-		function loadScript(url, callback) {
-
-			const script = document.createElement('script');
-
-			script.type = 'text/javascript';
-
-			script.src = url;
-
-			script.onload = callback;
-
-			script.onerror = function () {
-
-				console.error('Error al cargar el script:', url);
-
-			};
-
-			document.head.appendChild(script);
-
-		}
-
-		// Inicializar Embedded Messaging
-
-		function initEmbeddedMessaging() {
-
-			if (isChatInitialized) {
-
-				console.warn('El chatbot ya está inicializado.');
-
-				return;
-
-			}
-
-			try {
-
-				console.log('Inicializando embeddedservice_bootstrap...');
-
-				embeddedservice_bootstrap.settings.language = 'es_MX';
-
-				embeddedservice_bootstrap.init(
-
-					'00D7Z000000AGdW',
-
-					'Iago',
-
-					'https://ouvacdepourense--ouvacqa.sandbox.my.site.com/ESWIago1727356051668',
-
-					{
-
-						scrt2URL: 'https://ouvacdepourense--ouvacqa.sandbox.my.salesforce-scrt.com'
-
-					}
-
-				);
-
-				isChatInitialized = true; // Marcar como inicializado
-
-			} catch (err) {
-
-				console.error('Error al inicializar el chatbot:', err);
-
-			}
-
-		}
-
-		// Cargar el script de Salesforce
-
-		loadScript(
-
-			'https://ouvacdepourense--ouvacqa.sandbox.my.site.com/ESWIago1727356051668/assets/js/bootstrap.min.js',
-
-			function () {
-
-				console.log('Script de Salesforce cargado.');
-
-			}
-
-		);
-	</script>
-</body>
-
 </html>
